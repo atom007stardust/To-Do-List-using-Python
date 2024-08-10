@@ -1,0 +1,108 @@
+<html>
+<head>
+<title>To-Do List.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #7a7e85;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+To-Do List.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">tkinter </span><span class="s0">as </span><span class="s1">tk</span>
+<span class="s0">from </span><span class="s1">tkinter </span><span class="s0">import </span><span class="s1">font</span>
+
+<span class="s2">#Create the main window</span>
+<span class="s1">root </span><span class="s3">= </span><span class="s1">tk</span><span class="s3">.</span><span class="s1">Tk</span><span class="s3">()</span>
+<span class="s1">root</span><span class="s3">.</span><span class="s1">title</span><span class="s3">(</span><span class="s4">&quot;My To-Do List&quot;</span><span class="s3">)</span>
+<span class="s1">root</span><span class="s3">.</span><span class="s1">geometry</span><span class="s3">(</span><span class="s4">&quot;400x500&quot;</span><span class="s3">) </span><span class="s2">#Set window size</span>
+
+
+<span class="s2">#Create an empty list to hold the tasks</span>
+<span class="s1">tasks </span><span class="s3">= []</span>
+
+<span class="s2">#Function to add a task</span>
+<span class="s0">def </span><span class="s1">addTask</span><span class="s3">():</span>
+    <span class="s1">task </span><span class="s3">=  </span><span class="s1">entry</span><span class="s3">.</span><span class="s1">get</span><span class="s3">()</span>
+    <span class="s0">if </span><span class="s1">task</span><span class="s3">:  </span><span class="s2">#if task is not empty</span>
+        <span class="s1">tasks</span><span class="s3">.</span><span class="s1">append</span><span class="s3">(</span><span class="s1">task</span><span class="s3">)</span>
+        <span class="s1">list_box</span><span class="s3">.</span><span class="s1">insert</span><span class="s3">(</span><span class="s1">tk</span><span class="s3">.</span><span class="s1">END</span><span class="s3">,</span><span class="s1">task</span><span class="s3">) </span><span class="s2">#tk.END means task should be added at the end of the list, task indicates the content</span>
+        <span class="s1">entry</span><span class="s3">.</span><span class="s1">delete</span><span class="s3">(</span><span class="s5">0</span><span class="s3">,</span><span class="s1">tk</span><span class="s3">.</span><span class="s1">END</span><span class="s3">) </span><span class="s2">#clear the entry box</span>
+
+<span class="s0">def </span><span class="s1">deleteTask</span><span class="s3">():</span>
+    <span class="s1">selected_task_index </span><span class="s3">= </span><span class="s1">list_box</span><span class="s3">.</span><span class="s1">curselection</span><span class="s3">() </span><span class="s2">#gets the index of the selected task</span>
+    <span class="s2">#curselection returns a tuple of all the selected choices</span>
+    <span class="s0">if </span><span class="s1">selected_task_index</span><span class="s3">:</span>
+        <span class="s1">index</span><span class="s3">=</span><span class="s1">selected_task_index</span><span class="s3">[</span><span class="s5">0</span><span class="s3">]</span>
+        <span class="s1">tasks</span><span class="s3">.</span><span class="s1">pop</span><span class="s3">(</span><span class="s1">index</span><span class="s3">)</span>
+        <span class="s1">list_box</span><span class="s3">.</span><span class="s1">delete</span><span class="s3">(</span><span class="s1">index</span><span class="s3">)</span>
+<span class="s0">def </span><span class="s1">listTasks</span><span class="s3">():</span>
+    <span class="s1">list_box</span><span class="s3">.</span><span class="s1">delete</span><span class="s3">(</span><span class="s5">0</span><span class="s3">,</span><span class="s1">tk</span><span class="s3">.</span><span class="s1">END</span><span class="s3">)</span>
+    <span class="s0">for </span><span class="s1">index</span><span class="s3">, </span><span class="s1">task </span><span class="s0">in </span><span class="s1">enumerate</span><span class="s3">(</span><span class="s1">tasks</span><span class="s3">):</span>
+        <span class="s1">list_box</span><span class="s3">.</span><span class="s1">insert</span><span class="s3">(</span><span class="s1">tk</span><span class="s3">.</span><span class="s1">END</span><span class="s3">,</span><span class="s4">f&quot;</span><span class="s0">{</span><span class="s1">index</span><span class="s0">}</span><span class="s4">. </span><span class="s0">{</span><span class="s1">task</span><span class="s0">}</span><span class="s4">&quot;</span><span class="s3">)</span>
+<span class="s0">def </span><span class="s1">exit</span><span class="s3">():</span>
+    <span class="s1">root</span><span class="s3">.</span><span class="s1">quit</span><span class="s3">()</span>
+
+
+
+
+
+<span class="s2">#Additional styling</span>
+<span class="s2">#Custom font</span>
+<span class="s1">custom_font </span><span class="s3">= </span><span class="s1">font</span><span class="s3">.</span><span class="s1">Font</span><span class="s3">(</span><span class="s1">family</span><span class="s3">=</span><span class="s4">&quot;Arial&quot;</span><span class="s3">,</span><span class="s1">size</span><span class="s3">=</span><span class="s5">12</span><span class="s3">)</span>
+<span class="s2">#Create a frame for buttons</span>
+<span class="s1">button_frame </span><span class="s3">= </span><span class="s1">tk</span><span class="s3">.</span><span class="s1">Frame</span><span class="s3">(</span><span class="s1">root</span><span class="s3">)</span>
+<span class="s1">button_frame</span><span class="s3">.</span><span class="s1">pack</span><span class="s3">(</span><span class="s1">pady</span><span class="s3">=</span><span class="s5">10</span><span class="s3">)</span>
+
+<span class="s2">#In GUI, a user doesn't interact through a console, rather they interact with text boxes</span>
+<span class="s2">#so you need gui elements rather than input or print</span>
+
+<span class="s2">#Create an entry box to enter new tasks</span>
+<span class="s1">entry </span><span class="s3">= </span><span class="s1">tk</span><span class="s3">.</span><span class="s1">Entry</span><span class="s3">(</span><span class="s1">root</span><span class="s3">, </span><span class="s1">width</span><span class="s3">=</span><span class="s5">40</span><span class="s3">)</span>
+<span class="s1">entry</span><span class="s3">.</span><span class="s1">pack</span><span class="s3">(</span><span class="s1">pady</span><span class="s3">=</span><span class="s5">10</span><span class="s3">)</span>
+
+<span class="s2">#Now create a button for adding the tasks</span>
+<span class="s1">add_button </span><span class="s3">= </span><span class="s1">tk</span><span class="s3">.</span><span class="s1">Button</span><span class="s3">(</span><span class="s1">button_frame</span><span class="s3">, </span><span class="s1">text </span><span class="s3">= </span><span class="s4">&quot;Add a new task &quot;</span><span class="s3">, </span><span class="s1">font</span><span class="s3">=(</span><span class="s4">&quot;Arial&quot;</span><span class="s3">,</span><span class="s5">18</span><span class="s3">),</span><span class="s1">command</span><span class="s3">=</span><span class="s1">addTask</span><span class="s3">,</span><span class="s1">bg</span><span class="s3">=</span><span class="s4">&quot;#4CAF50&quot;</span><span class="s3">,</span><span class="s1">fg</span><span class="s3">=</span><span class="s4">&quot;white&quot;</span><span class="s3">)</span>
+<span class="s1">add_button</span><span class="s3">.</span><span class="s1">grid</span><span class="s3">(</span><span class="s1">row</span><span class="s3">=</span><span class="s5">0</span><span class="s3">,</span><span class="s1">column</span><span class="s3">=</span><span class="s5">0</span><span class="s3">,</span><span class="s1">padx</span><span class="s3">=</span><span class="s5">5</span><span class="s3">,</span><span class="s1">pady</span><span class="s3">=</span><span class="s5">5</span><span class="s3">)</span>
+
+
+<span class="s2">#Creating a button for deleting tasks</span>
+<span class="s1">delete_button </span><span class="s3">= </span><span class="s1">tk</span><span class="s3">.</span><span class="s1">Button</span><span class="s3">(</span><span class="s1">button_frame</span><span class="s3">, </span><span class="s1">text </span><span class="s3">= </span><span class="s4">&quot;Delete a task&quot;</span><span class="s3">, </span><span class="s1">font</span><span class="s3">=(</span><span class="s4">&quot;Arial&quot;</span><span class="s3">,</span><span class="s5">18</span><span class="s3">),</span><span class="s1">command</span><span class="s3">=</span><span class="s1">deleteTask</span><span class="s3">,</span><span class="s1">bg</span><span class="s3">=</span><span class="s4">&quot;#F44336&quot;</span><span class="s3">,</span><span class="s1">fg</span><span class="s3">=</span><span class="s4">&quot;white&quot;</span><span class="s3">)</span>
+<span class="s1">delete_button</span><span class="s3">.</span><span class="s1">grid</span><span class="s3">(</span><span class="s1">row</span><span class="s3">=</span><span class="s5">0</span><span class="s3">,</span><span class="s1">column</span><span class="s3">=</span><span class="s5">1</span><span class="s3">,</span><span class="s1">padx</span><span class="s3">=</span><span class="s5">5</span><span class="s3">,</span><span class="s1">pady</span><span class="s3">=</span><span class="s5">5</span><span class="s3">)</span>
+
+<span class="s2">#Create a button for listing all the tasks</span>
+<span class="s1">list_button </span><span class="s3">= </span><span class="s1">tk</span><span class="s3">.</span><span class="s1">Button</span><span class="s3">(</span><span class="s1">button_frame</span><span class="s3">, </span><span class="s1">text</span><span class="s3">=</span><span class="s4">&quot;List all tasks&quot;</span><span class="s3">, </span><span class="s1">font</span><span class="s3">=(</span><span class="s4">&quot;Arial&quot;</span><span class="s3">,</span><span class="s5">18</span><span class="s3">),</span><span class="s1">command</span><span class="s3">=</span><span class="s1">listTasks</span><span class="s3">,</span><span class="s1">bg</span><span class="s3">=</span><span class="s4">&quot;#2196F3&quot;</span><span class="s3">,</span><span class="s1">fg</span><span class="s3">=</span><span class="s4">&quot;white&quot;</span><span class="s3">)</span>
+<span class="s1">list_button</span><span class="s3">.</span><span class="s1">grid</span><span class="s3">(</span><span class="s1">row</span><span class="s3">=</span><span class="s5">1</span><span class="s3">, </span><span class="s1">column</span><span class="s3">=</span><span class="s5">0</span><span class="s3">,</span><span class="s1">padx</span><span class="s3">=</span><span class="s5">5</span><span class="s3">,</span><span class="s1">pady</span><span class="s3">=</span><span class="s5">5</span><span class="s3">)</span>
+
+<span class="s2">#Creating a list box to display a list of items</span>
+<span class="s1">list_box </span><span class="s3">= </span><span class="s1">tk</span><span class="s3">.</span><span class="s1">Listbox</span><span class="s3">(</span><span class="s1">root</span><span class="s3">, </span><span class="s1">width</span><span class="s3">=</span><span class="s5">50</span><span class="s3">,</span><span class="s1">height</span><span class="s3">=</span><span class="s5">20</span><span class="s3">,</span><span class="s1">font</span><span class="s3">=</span><span class="s1">custom_font</span><span class="s3">,</span><span class="s1">selectmode</span><span class="s3">=</span><span class="s1">tk</span><span class="s3">.</span><span class="s1">SINGLE</span><span class="s3">)</span>
+<span class="s1">list_box</span><span class="s3">.</span><span class="s1">pack</span><span class="s3">(</span><span class="s1">pady</span><span class="s3">=</span><span class="s5">10</span><span class="s3">)</span>
+
+<span class="s2">#Create a button to exit the applicaiton</span>
+<span class="s1">exit_button </span><span class="s3">= </span><span class="s1">tk</span><span class="s3">.</span><span class="s1">Button</span><span class="s3">(</span><span class="s1">button_frame</span><span class="s3">, </span><span class="s1">text</span><span class="s3">=</span><span class="s4">&quot;Exit&quot;</span><span class="s3">, </span><span class="s1">font</span><span class="s3">= (</span><span class="s4">&quot;Arial&quot;</span><span class="s3">,</span><span class="s5">18</span><span class="s3">),</span><span class="s1">command</span><span class="s3">=</span><span class="s1">exit</span><span class="s3">,</span><span class="s1">bg</span><span class="s3">=</span><span class="s4">&quot;#FFC107&quot;</span><span class="s3">,</span><span class="s1">fg</span><span class="s3">=</span><span class="s4">&quot;black&quot;</span><span class="s3">)</span>
+<span class="s1">exit_button</span><span class="s3">.</span><span class="s1">grid</span><span class="s3">(</span><span class="s1">row</span><span class="s3">=</span><span class="s5">1</span><span class="s3">, </span><span class="s1">column</span><span class="s3">=</span><span class="s5">1</span><span class="s3">,</span><span class="s1">padx</span><span class="s3">=</span><span class="s5">5</span><span class="s3">,</span><span class="s1">pady</span><span class="s3">=</span><span class="s5">5</span><span class="s3">)</span>
+
+<span class="s2">#The Command Parameter:</span>
+<span class="s2">#When you createa a button using tk.Button(), command parameter can be used to link it to a specific function, like(add a task, delete a task, list all tasks) etc</span>
+<span class="s2">#The function listed in Command will be executed, whenever that button is pressed</span>
+
+
+
+
+
+
+
+
+
+<span class="s2">#Run the window's main loop</span>
+<span class="s1">root</span><span class="s3">.</span><span class="s1">mainloop</span><span class="s3">()</span></pre>
+</body>
+</html>
